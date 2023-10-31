@@ -1,0 +1,18 @@
+{
+  "apps": [
+    {
+      "name": "ai-worker",
+      "cwd": "./",
+      "script": "./index.js",
+      "cron_restart": "0 0 * * *",
+      "log_date_format": "YYYY-MM-DD HH:mm Z",
+      "error_file": "./logs/app-err.log",
+      "out_file": "./logs/app-out.log",
+      "pid_file": "./logs/node.pid",
+      "autorestart": true,
+      "instances": 1,
+      "min_uptime": "60s",
+      "max_restarts": 100
+    }
+  ]
+}

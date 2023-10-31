@@ -1,0 +1,50 @@
+{
+  "name": "worker-assistant",
+  "version": "1.0.0",
+  "description": "智能企微秘书1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "pm2": "pm2 start pm2.json",
+    "stop": "pm2 stop ai-worker",
+    "restart": "pm2 restart ai-worker",
+    "start": "node index.js",
+    "test": "node src/index.template.js"
+  },
+  "author": "Leo_chen",
+  "license": "MIT",
+  "keywords": [
+    "wechaty2.x",
+    "wechaty",
+    "mongoose",
+    "企业微信机器人",
+    "企微助手",
+    "chatgpt",
+    "微秘书",
+    "智能机器人",
+    "对话机器人",
+    "node",
+    "js"
+  ],
+  "engines": {
+    "node": ">=16",
+    "npm": ">=7"
+  },
+  "dependencies": {
+    "@juzi/wechaty": "^1.0.75",
+    "@juzi/wechaty-puppet": "^1.0.68",
+    "@juzi/wechaty-puppet-service": "^1.0.80",
+    "wechaty-web-panel": "^1.6.26"
+  },
+  "devDependencies": {
+    "pm2": "^4.2.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leochen-g/worker-assistant.git"
+  },
+  "bugs": {
+    "url": "https://github.com/leochen-g/worker-assistant/issues"
+  },
+  "homepage": "https://github.com/leochen-g/worker-assistant#readme"
+}
