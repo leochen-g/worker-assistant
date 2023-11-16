@@ -164,7 +164,7 @@ node 版本 >16
 
 ```shell
 
-docker pull aibotk/wechat-assistant
+docker pull aibotk/worker-assistant
 
 ```
 
@@ -175,14 +175,14 @@ docker pull aibotk/wechat-assistant
 1、请在项目根目录执行，这个命令是前台执行可以直接看到log日志的，但是没法关闭，只能销毁终端实例
 
 ```shell
-docker run -e AIBOTK_KEY="微秘书apikey" -e AIBOTK_SECRET="微秘书apiSecret" --name=wechatbot aibotk/wechat-assistant
+docker run -e AIBOTK_KEY="微秘书apikey" -e AIBOTK_SECRET="微秘书apiSecret" --name=workerbot aibotk/worker-assistant
 
 ```
 
 2、这个命令可以在后台运行，多了一个`-d`
 
 ```shell
-docker run -d -e AIBOTK_KEY="微秘书apikey" -e AIBOTK_SECRET="微秘书apiSecret" --name=wechatbot aibotk/wechat-assistant
+docker run -d -e AIBOTK_KEY="微秘书apikey" -e AIBOTK_SECRET="微秘书apiSecret" --name=workerbot aibotk/worker-assistant
 
 ```
 
@@ -193,9 +193,9 @@ docker run -d -e AIBOTK_KEY="微秘书apikey" -e AIBOTK_SECRET="微秘书apiSecr
 需要提前安装 docker 环境，项目根目录执行一下命令
 
 ```shell script
-docker build -t wechat-assistant .
+docker build -t worker-assistant .
 #web协议
-docker run -e AIBOTK_KEY="微秘书apikey" -e AIBOTK_SECRET="微秘书apiSecret" wechat-assistant
+docker run -e AIBOTK_KEY="微秘书apikey" -e AIBOTK_SECRET="微秘书apiSecret" worker-assistant
 ```
 
 其他步骤同上
@@ -216,98 +216,14 @@ Gitpod 是一个在线和开源平台，用于自动化和现成代码的开发�
 
 环境变量：AIBOTK_KEY和AIBOTK_SECRET必填
 
-### ipad协议运行
-如果你有ipad的token，可以执行以下命令
+### 运行
+如果你有企微的token，可以执行以下命令，没有的话可以在 [此处申请](https://tss.juzibot.com?aff=aibotkgit)，初始有7天免费试用的Token
 
 ```shell
 
-docker run -d -e PAD_LOCAL_TOKEN="你申请的ipadlocal token" -e AIBOTK_KEY="微秘书apikey" -e AIBOTK_SECRET="微秘书apiSecret" --name=wechatbot aibotk/wechat-assistant
+docker run -d -e WORK_PRO_TOKEN="你申请的企微 token" -e AIBOTK_KEY="微秘书apikey" -e AIBOTK_SECRET="微秘书apiSecret" --name=wechatbot aibotk/worker-assistant
 
 ```
-
-### 企微协议运行
-如果你有企微的token，可以执行以下命令
-
-```shell
-
-docker run -d -e WORK_PRO_TOKEN="你申请的企微 token" -e AIBOTK_KEY="微秘书apikey" -e AIBOTK_SECRET="微秘书apiSecret" --name=wechatbot aibotk/wechat-assistant
-
-```
-### engine 大恩协议源码运行
-
-其他安装步骤参考：[engine协议部署](https://wechat.aibotk.com/docs/puppet-engine)，此处仅为源码运行说明
-
-修改文件`src/engine.js`文件变量
-
-```javascript
-import {WechatyBuilder}  from 'wechaty'
-import {WechatyWebPanelPlugin}  from 'wechaty-web-panel'
-import {PuppetEngine} from 'wechaty-puppet-engine'
-
-
-const name = 'wechat-assistant-engine';
-let bot = ''
-console.log('使用puppet-engine协议启动，默认使用大恩wxhook，请在windows 环境下使用')
-
-bot = WechatyBuilder.build({
-    name,
-    puppet: new PuppetEngine({
-        port: '8089', // 对应注入器中的 callBackUrl=http://localhost:8089/wechat/
-        httpServer: 'http://127.0.0.1:8055', // 对应注入器参数port=8055
-        runLocal: true
-    })
-});
-
-bot.use(WechatyWebPanelPlugin({
-    apiKey: '填入微秘书平台apikey', apiSecret: '填入微秘书平台apisecret',
-}))
-bot.start()
-    .catch((e) => console.error(e));
-```
-
-项目根目录执行命令：`npm run engine`
-
-### 公众号部署
-
-公众号部署目前仅只支持源码部署配置
-
-修改文件`src/office.js`文件变量
-
-```javascript
-import {WechatyBuilder} from 'wechaty'
-import {WechatyWebPanelPlugin} from 'wechaty-web-panel'
-import {PuppetOA} from 'wechaty-puppet-official-account'
-const name = 'office-assistant-pro';
-let bot = '';
-const oa = new PuppetOA({
-    appId           : '公众号appid',
-    appSecret       : '公众号appSecret',
-    token           : '公众号加密token',
-    // personalMode: true, // 如果你是个人订阅号或者未认证 请开启此项
-    // port 和 webhookProxyUrl 自己选择一个
-    // port: 8077, // 有自己域名或者服务器 可以启用这个 服务启动的端口 自己映射好配到公众号后台机就行
-    webhookProxyUrl: 'https://****.loca.lt'  // 如果没有自己的域名可以直接用默认自带穿透代理服务localtunnel ***替换成随机字符串即可  这个域名记得配置到公众号后台
-})
-
-
-bot = WechatyBuilder.build({
-    name, // generate xxxx.memory-card.json and save login data for the next login
-    puppet: oa,
-});
-
-
-bot
-    .use(
-        WechatyWebPanelPlugin({
-            apiKey: '****',
-            apiSecret: '****'
-        }
-    ))
-bot.start()
-    .catch((e) => console.error(e));
-```
-
-执行命令：`npm run office`
 
 ## 体验与交流
 
@@ -360,4 +276,4 @@ bot.start()
 请合理使用，一切不良行为和后果均与作者无关！
 
 [gitpod_img]: https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod
-[gitpod_link]: https://gitpod.io/#https://github.com/leochen-g/wechat-assistant-pro
+[gitpod_link]: https://gitpod.io/#https://github.com/leochen-g/worker-assistant
