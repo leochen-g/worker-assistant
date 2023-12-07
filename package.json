@@ -1,6 +1,6 @@
 {
   "name": "worker-assistant",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "智能企微秘书1.0.0",
   "main": "index.js",
   "type": "module",
@@ -34,7 +34,7 @@
     "@juzi/wechaty": "^1.0.79",
     "@juzi/wechaty-puppet": "^1.0.69",
     "@juzi/wechaty-puppet-service": "^1.0.81",
-    "wechaty-web-panel": "^1.6.31"
+    "wechaty-web-panel": "^1.6.32"
   },
   "devDependencies": {
     "pm2": "^4.2.3"
