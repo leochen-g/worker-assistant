@@ -1,6 +1,6 @@
 {
   "name": "worker-assistant",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "智能企微秘书1.0.0",
   "main": "index.js",
   "type": "module",
