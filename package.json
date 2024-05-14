@@ -1,6 +1,6 @@
 {
   "name": "worker-assistant",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "description": "智能企微秘书1.0.0",
   "main": "index.js",
   "type": "module",
@@ -35,7 +35,7 @@
     "@grpc/grpc-js": "1.9.14",
     "@juzi/wechaty-puppet": "^1.0.78",
     "@juzi/wechaty-puppet-service": "^1.0.87",
-    "wechaty-web-panel": "^1.6.52"
+    "wechaty-web-panel": "^1.6.53"
   },
   "devDependencies": {
     "pm2": "^4.2.3"
