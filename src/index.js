@@ -1,5 +1,5 @@
 import {WechatyBuilder} from '@juzi/wechaty'
-import {WechatyWebPanelPlugin} from 'wechaty-web-panel'
+import {WechatyWebPanelPlugin, WechatyMessageRecordPlugin} from 'wechaty-web-panel'
 
 const name = 'worker-assistant';
 let bot = '';
@@ -22,5 +22,6 @@ bot = WechatyBuilder.build({
 bot.use(WechatyWebPanelPlugin({
     apiKey: '***', apiSecret: '***',
 }))
+bot.use(WechatyMessageRecordPlugin())
 bot.start()
     .catch((e) => console.error(e));
